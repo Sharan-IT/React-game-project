@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>3 Page React Project</title>
+
+  <!-- React CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- CSS Styling -->
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 360px;
+      margin: 80px auto;
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+
+    .logo {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #5a67d8;
+    }
+
+    .thankyou {
+      font-size: 22px;
+      color: #444;
+    }
+
+    .emojis {
+      font-size: 40px;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <!-- React Code -->
+  <script type="text/babel">
+
+    function App() {
+      const [page, setPage] = React.useState("login");
+
+      return (
+        <>
+          {page === "login" && <Login onNext={() => setPage("details")} />}
+          {page === "details" && <Details onNext={() => setPage("thankyou")} />}
+          {page === "thankyou" && <ThankYou />}
+        </>
+      );
+    }
+
+    // 1️⃣ Login Page
+    function Login({ onNext }) {
+      return (
+        <div className="container">
+          <div className="logo">🔐</div>
+          <h2>Login</h2>
+          <input type="text" placeholder="Username" />
+          <input type="password" placeholder="Password" />
+          <button onClick={onNext}>Login</button>
+        </div>
+      );
+    }
+
+    // 2️⃣ Details Page
+    function Details({ onNext }) {
+      return (
+        <div className="container">
+          <div className="logo">📝</div>
+          <h2>User Details</h2>
+          <input type="text" placeholder="Full Name" />
+          <input type="number" placeholder="Age" />
+          <input type="text" placeholder="Address" />
+          <input type="text" placeholder="Contact Number" />
+          <button onClick={onNext}>Submit</button>
+        </div>
+      );
+    }
+
+    // 3️⃣ Thank You Page
+    function ThankYou() {
+      return (
+        <div className="container">
+          <div className="logo">🎉</div>
+          <h2>Thank You!</h2>
+          <p className="thankyou">
+            Your details have been submitted successfully.
+          </p>
+          <div className="emojis">😊❤️✨🎊</div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
+
+  </script>
+</body>
+</html>
